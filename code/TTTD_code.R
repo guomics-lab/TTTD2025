@@ -10,7 +10,6 @@ library(pheatmap)
 TTTDinfo = read.xlsx("D:/chh/2023workProject/20240821TTTD/datas/20240821_TTTD_QE_480_unique_patient_info_no_NA.xlsx")
 sinfo = read.xlsx("D:/chh/2023workProject/20240821TTTD/datas/20240107_TTTD_sample_info.xlsx")
 machine_info=read.xlsx('D:/chh/2023workProject/20240821TTTD/QC/machine_info.xlsx', rowNames = T)
-# machine_info$Histopathology_type = gsub('PTMC', 'PTC', machine_info$Histopathology_type)
 
 colnames(machine_info)
 machine_info[1:2,1:2]
@@ -80,10 +79,7 @@ dat480 = dat480[na_row!=1]
 
 
 delinfo = subset(machine_info, Tissue_type=='thyroid' & Histopathology_type!='uncertain' & SampleType!='FNA_in_vivo')
-# delinfo = delinfo[!grepl('ool', rownames(delinfo)),]
-# delinfo = delinfo[!grepl('mouse', rownames(delinfo)),]
-# delinfo = delinfo[!grepl('qc', rownames(delinfo)),]
-# delinfo = subset(delinfo, Histopathology_type!='MEC' )
+
 delinfo = subset(delinfo, qe480=='480' )
 unique(delinfo$TrainTest)
 dat480_deldat = dat480[,rownames(delinfo)]
